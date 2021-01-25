@@ -1,0 +1,46 @@
+{
+  "name": "greatcodeteam/laravel-greatcode",
+  "description": "Laravel GreatCode Team",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Pham Minh An",
+      "email": "anphamlmht@gmail.com"
+    },
+    {
+      "name": "Hoang Van Linh",
+      "email": "iamhoangvanlinh@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "^7.4|^8.0",
+    "ext-json": "*",
+    "firebase/php-jwt": "^5.0",
+    "illuminate/auth": "^8.2",
+    "illuminate/console": "^8.2",
+    "illuminate/container": "^8.2",
+    "illuminate/contracts": "^8.2",
+    "illuminate/cookie": "^8.2",
+    "illuminate/database": "^8.2",
+    "illuminate/encryption": "^8.2",
+    "illuminate/http": "^8.2",
+    "illuminate/support": "^8.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "GreatCode\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "GreatCode\\Provider\\GreatCodeProvider"
+      ]
+    }
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
