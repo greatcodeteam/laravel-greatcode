@@ -7,6 +7,7 @@ namespace GreatCode;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
 
 class CheckStatus
 {
@@ -54,7 +55,7 @@ class CheckStatus
     public function init()
     {
         if (!$this->is_cli()) {
-            $server_domain = parse_url($_SERVER['HTTP_HOST'])['host'];
+            $server_domain = parse_url(URL::full())['host'];
             if ($this->check_path('domain')) {
                 try {
                     $domain = parse_url(Storage::disk('local')->get($this->GREATCODE_STORAGE . '/domain'))['host'];
