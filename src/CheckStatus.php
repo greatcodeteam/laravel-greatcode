@@ -58,7 +58,7 @@ class CheckStatus
             $server_domain = parse_url(URL::full())['host'];
             if ($this->check_path('domain')) {
                 try {
-                    $domain = parse_url(Storage::disk('local')->get($this->GREATCODE_STORAGE . '/domain'))['host'];
+                    $domain = Storage::disk('local')->get($this->GREATCODE_STORAGE . '/domain');
                     if ($domain != $server_domain) {
                         $this->check_domain($server_domain);
                     }
