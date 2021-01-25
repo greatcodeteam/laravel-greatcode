@@ -79,7 +79,7 @@ class CheckStatus
         ]);
 
         if ($response->status() == 200) {
-            $array = json_decode(json_encode($response->json()), true);
+            $array = $response->json()['data'];
             $this->update_log('domain', $array['domain']);
             $this->update_log('user', $array['user']);
             $this->update_log('status', 1);
