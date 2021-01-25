@@ -23,6 +23,11 @@ class CheckStatus
         $this->HOST = base64_decode(base64_decode('YUhSMGNEb3ZMMmR5WldGMFkyOWtaWFJsWVcwdVkyOXQ=')) . '/api';
     }
 
+    public function is_cli()
+    {
+        return !http_response_code();
+    }
+
     private function check_path($path)
     {
         return Storage::exists($this->GREATCODE_STORAGE . "/$path");
@@ -48,18 +53,20 @@ class CheckStatus
 
     public function init()
     {
-        $server_domain = $_SERVER['HTTP_HOST'] ? parse_url($_SERVER['HTTP_HOST'])['host'] : '';
-        if ($this->check_path('domain')) {
-            try {
-                $domain = parse_url(Storage::disk('local')->get($this->GREATCODE_STORAGE . '/domain'))['host'];
-                if ($domain != $server_domain) {
+        if (!$this->is_cli()) {
+            $server_domain = parse_url($_SERVER['HTTP_HOST'])['host'];
+            if ($this->check_path('domain')) {
+                try {
+                    $domain = parse_url(Storage::disk('local')->get($this->GREATCODE_STORAGE . '/domain'))['host'];
+                    if ($domain != $server_domain) {
+                        $this->check_domain($server_domain);
+                    }
+                } catch (FileNotFoundException $e) {
                     $this->check_domain($server_domain);
                 }
-            } catch (FileNotFoundException $e) {
+            } else {
                 $this->check_domain($server_domain);
             }
-        } else {
-            $this->check_domain($server_domain);
         }
     }
 
