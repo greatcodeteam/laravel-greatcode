@@ -48,7 +48,10 @@ class CheckStatus
 
     public function init()
     {
-        $server_domain = parse_url($_SERVER['HTTP_HOST'])['host'];
+        $server_domain = '';
+        if ($_SERVER) {
+            $server_domain = parse_url($_SERVER['HTTP_HOST'])['host'];
+        }
 
         if ($this->check_path('domain')) {
             try {
