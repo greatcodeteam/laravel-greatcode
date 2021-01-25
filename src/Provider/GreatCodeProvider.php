@@ -3,6 +3,7 @@
 
 namespace GreatCode\Provider;
 
+use GreatCode\CheckStatus;
 use Illuminate\Support\ServiceProvider;
 
 class GreatCodeProvider extends ServiceProvider
@@ -24,6 +25,7 @@ class GreatCodeProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $status = new CheckStatus(config('greatcode.product_UUID'), config('greatcode.domain'));
+        $status->init();
     }
 }
